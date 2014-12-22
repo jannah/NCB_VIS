@@ -100,12 +100,13 @@ function getNoteHTML(n)
 }
 function getTitleHTML(d) {
     format = d3.format("0,000");
+    
     var html = "<div class='tooltip-body'>"
             + "<span class='item'>" + d[0].values[0].Item + "</span><br>"
-            + "<span class='year y1 " + d[0].values[0].call + "'> (" + d[0].values[0].Year + ")</span>"
-            + "<span class='amount y1 " + d[0].values[0].call + "'> " + format(d[0].values[0].Amount) + " SR</span><br>"
-            + "<span class='year y2 " + d[1].values[0].call + "'> (" + d[1].values[0].Year + ")</span>"
-            + "<span class='amount y2 " + d[1].values[0].call + "'> " + format(d[1].values[0].Amount) + " SR</span>"
+            + "<span class='year y1 " + d[0].values[0].class + "'> (" + d[0].values[0].Year + ")</span>"
+            + "<span class='amount y1 " + d[0].values[0].class + "'> " + format(d[0].values[0].Amount) + " SR</span><br>"
+            + "<span class='year y2 " + d[1].values[0].class + "'> (" + d[1].values[0].Year + ")</span>"
+            + "<span class='amount y2 " + d[1].values[0].class + "'> " + format(d[1].values[0].Amount) + " SR</span>"
             + "</div>";
     return html;
 //            return d.Item + ' (' + d.Year + '): ' + format(d.Amount) + ' SR';
@@ -204,7 +205,7 @@ var tableChart = function () {
                     title: function (d) {
                         var el = _.select(data, {'Item': d})[0];
                         var note = getNote(el.Note);
-                        var title = note ? note.title : d;
+                        var title = note ? note.note + '. ' + note.title : d;
                         return  title;
                     },
                     "data-content": function (d) {
@@ -249,9 +250,18 @@ var tableChart = function () {
                             'data-year': d.values[0].values[0].Year,
                             'data-amount': d.values[0].values[0].Amount,
                             title: getTitleHTML(d.values)
-
-
                         });
+                if (d.values[0].values[0]['class'] !== 'title') {
+                    bar.append('rect')
+                            .attr({
+                                x: axisW,
+                                y: yScale(d.key),
+                                height: yScale.rangeBand(),
+                                width: cw,
+                                class: 'ncb-tooltip placeholder',
+                                title: getTitleHTML(d.values)
+                            });
+                }
             }
 //            bar.append('text')
 //                    .attr({
