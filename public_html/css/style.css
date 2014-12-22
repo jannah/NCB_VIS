@@ -1,0 +1,161 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 20, 2014, 1:16:39 AM
+    Author     : Hassan
+*/
+
+@font-face {
+    font-family: 'praxis_lt_lightregular';
+    src: url('fonts/praxis-lt-light.eot');
+    src: url('fonts/praxis-lt-light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'praxis_lt_lightregular';
+    src: url('fonts/praxis-lt-bold.eot');
+    src: url('fonts/praxis-lt-bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+body, h1{
+    font-family: 'praxis_lt_lightregular' !important;
+}
+#container{
+    margin:10px;
+}
+h1{
+    text-align:center;
+}
+#chart{
+    width:100%;
+    height:100%;
+    min-height: 600px;
+}
+
+.domain{
+    /* stroke-width: 1px; */
+    /* stroke: red; */
+}
+.title{
+    color:#FAA635;
+    font-weight: bolder;
+    fill:  #FAA635;
+}
+.tooltip{
+    /*background-color:white;*/
+}
+.tooltip-arrow{
+    border-top-color: white;
+    color: rgb(250, 166, 53) !important;
+
+}
+.tooltip-inner{
+    color: black !important;
+    background-color:rgb(249, 235, 217) !important;
+    border: rgb(250, 166, 53) solid 2px;
+    font-weight:bold;
+}
+.item{
+
+}
+/*
+.y2{
+    color:rgba(0, 129, 67, .5);
+    fill:rgba(0, 129, 67,.5);
+}
+.y1{
+    color:rgb(0, 129, 67);
+    fill:rgb(0, 129, 67);
+}
+*/
+.y1.year,
+.y1.item{
+    color:rgb(0, 153, 70);
+    fill:rgb(0, 153, 70);
+}
+.y2.year,
+.y2.item{
+    color:rgba(0, 153,70, .5);
+    fill:rgba(0, 153, 70,.5);
+}
+.y1.year.negative,
+.y1.item.negative{
+    color:rgb(250, 166, 53);
+    fill:rgb(250, 166, 53);
+}
+.y2.year.negative
+.y2.item.negative{
+    color:rgba(250, 166, 53,.5);
+    fill:rgba(250, 166, 53,.5);
+}
+
+
+.y2.summary{
+    /*color:rgba(250, 166, 53,.5);*/
+    /*fill:rgba(250, 166, 53,.5);*/
+    color:rgba(0, 129, 67, .5);
+    fill:rgba(0, 129, 67,.5);}
+.y1.summary{
+    /*color:rgb(250, 166, 53);*/
+    /*fill:rgb(250, 166, 53);*/
+    color:rgb(0, 129, 67);
+    fill:rgb(0, 129, 67);}
+.summary{
+    color: rgb(0, 129, 67);
+    font-weight: bold;
+    fill: rgb(0, 129, 67);
+}
+
+path.domain{
+    stroke-width: .5px;
+    stroke: lightgrey;
+    fill: none;
+}
+
+.tooltip-body{
+
+}
+.tooltip-body.item{
+
+}
+.tooltip-body.year{
+
+}
+.tooltip-body.amount{
+
+}
+.axis-text{
+    cursor: pointer;
+}
+
+.x.axis line {
+    stroke: lightgray;
+}
+
+.x.axis .minor {
+    stroke-opacity: .5;
+}
+
+.popover{
+    max-width: 50% !important;
+    /* margin-top: 81px; */
+    border: 2px solid rgb(0, 129, 67) !important;
+}
+
+.popover-title{
+    background-color: rgba(0, 153, 70, .2) !important;
+
+    border: none !important;
+    margin: 0 !important;
+}
+.popover-content{
+
+}
+.popover.right .arrow{
+    color:  rgb(0, 129, 67) !important;
+}

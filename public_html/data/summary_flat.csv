@@ -1,0 +1,61 @@
+Type,Item,Note,Year,Amount '000,Amount,class
+Assets,Assets,,2013,,,title
+Assets,Cash and balances with SAMA,4,2013,39089688,39089688000,item
+Assets,Due from banks and other financial institutions,5,2013,14831332,14831332000,item
+Assets,"Investments, net",6,2013,125294012,125000000000,item
+Assets,"Loans and advances, net",7,2013,187687037,188000000000,item
+Assets,"Investment in associates, net",8,2013,828915,828915000,item
+Assets,"Other real estate, net",9,2013,216001,216001000,item
+Assets,"Property and equipment, net",10,2013,2761528,2761528000,item
+Assets,"Goodwill and other intangible assets, net",11,2013,873636,873636000,item
+Assets,Other assets,12,2013,5698185,5698185000,item
+Assets,Total Assets,,2013,377280334,377000000000,summary
+EL,Liabilities and Equity,,2013,,,title
+Liabilities,Liabilities,,2013,,,title
+Liabilities,Due to banks and other financial institutions,14,2013,24725314,24725314000,item
+Liabilities,Customers' deposits,15,2013,300601675,301000000000,item
+Liabilities,Debt securities issued,16,2013,1511250,1511250000,item
+Liabilities,Other liabilities,17,2013,7905915,7905915000,item
+Liabilities,Total liabilities,,2013,334744154,335000000000,summary
+Equity,Equity,,2013,,,title
+Equity,Share capital,18,2013,15000000,15000000000,item
+Equity,Treasury shares,42,2013,-177093,-177093000,item
+Equity,Statutory reserve,19,2013,15102989,15102989000,item
+Equity,Other reserves (cumulative changes in fair values),20,2013,1353948,1353948000,item
+Equity,Retained earnings,,2013,9699260,9699260000,item
+Equity,Proposed dividend,28,2013,1645573,1645573000,item
+Equity,Foreign currency translation reserve,,2013,-1690770,-1690770000,item
+Equity,Total equity attributable to equity holders of the Bank,,2013,40933907,40933907000,summary
+Equity,Non-controlling interests,40,2013,1602273,1602273000,item
+Equity,Total equity,,2013,42536180,42536180000,summary
+EL,Total liabilities and equity,,2013,377280334,378000000000,summary
+Assets,Assets,,2012,,,title
+Assets,Cash and balances with SAMA,4,2012,40298428,40298428000,item
+Assets,Due from banks and other financial institutions,5,2012,16402282,16402282000,item
+Assets,"Investments, net",6,2012,116427793,116000000000,item
+Assets,"Loans and advances, net",7,2012,163461189,163000000000,item
+Assets,"Investment in associates, net",8,2012,832631,832631000,item
+Assets,"Other real estate, net",9,2012,218144,218144000,item
+Assets,"Property and equipment, net",10,2012,2549896,2549896000,item
+Assets,"Goodwill and other intangible assets, net",11,2012,1172098,1172098000,item
+Assets,Other assets,12,2012,3897242,3897242000,item
+Assets,Total Assets,,2012,345259703,344370721000,summary
+EL,Liabilities and Equity,,2012,,,title
+Liabilities,Liabilities,,2012,,,title
+Liabilities,Due to banks and other financial institutions,14,2012,25574176,25574176000,item
+Liabilities,Customers' deposits,15,2012,273530090,274000000000,item
+Liabilities,Debt securities issued,16,2012,0,0,item
+Liabilities,Other liabilities,17,2012,6751292,6751292000,item
+Liabilities,Total liabilities,,2012,305855558,306000000000,summary
+Equity,Equity,,2012,,,title
+Equity,Share capital,18,2012,15000000,15000000000,item
+Equity,Treasury shares,42,2012,-177093,-177093000,item
+Equity,Statutory reserve,19,2012,13623678,13623678000,item
+Equity,Other reserves (cumulative changes in fair values),20,2012,1857342,1857342000,item
+Equity,Retained earnings,,2012,7051299,7051299000,item
+Equity,Proposed dividend,28,2012,1495975,1495975000,item
+Equity,Foreign currency translation reserve,,2012,-1147570,-1147570000,item
+Equity,Total equity attributable to equity holders of the Bank,,2012,37703631,37703631000,summary
+Equity,Non-controlling interests,40,2012,1700514,1700514000,item
+Equity,Total equity,,2012,39404145,39404145000,summary
+EL,Total liabilities and equity,,2012,345259703,346000000000,summary
