@@ -1,0 +1,27 @@
+id,source,target,value,group,notes
+1,Cash and balances with SAMA,Assets,39089688000,c1,
+2,Due from banks and other financial institutions,Assets,14831332000,c1,
+3,"Investments, net",Assets,125294012000,c1,
+4,"Loans and advances, net",Assets,187687037000,c1,
+5,"Investment in associates, net",Assets,828915000,c1,
+6,"Other real estate, net",Assets,216001000,c1,
+7,"Property and equipment, net",Assets,2761528000,c1,
+8,"Goodwill and other intangible assets, net",Assets,873636000,c1,
+9,Other assets,Assets,5698185000,c1,
+10,Assets,Liabilities and Equity,377280334000,c2,
+11,Liabilities and Equity,Liabilities,334744154000,c3,
+23,Liabilities,Due to banks and other financial institutions,24725314000,c3,
+24,Liabilities,Customers' deposits,300601675000,c3,
+25,Liabilities,Debt securities issued,1511250000,c3,
+26,Liabilities,Other liabilities,7905915000,c3,
+,Liabilities and Equity,Equity,42536180000,c3,
+,Equity,Total equity attributable to equity holders of the Bank,40933907000,c3,
+,Equity,Non-controlling interests,1602273000,c3,
+,Total equity attributable to equity holders of the Bank,Share capital,15000000000,c3,
+,Total equity attributable to equity holders of the Bank,Statutory reserve,15102989000,c3,
+,Total equity attributable to equity holders of the Bank,Other reserves (cumulative changes in fair values),1353948000,c3,
+,Total equity attributable to equity holders of the Bank,Retained earnings,9699260000,c3,
+,Total equity attributable to equity holders of the Bank,Proposed dividend,1645573000,c3,
+,Equity,Total equity attributable to equity holders of the Bank (Negative),1867863000,c3,negative
+,Total equity attributable to equity holders of the Bank (Negative),Foreign currency translation reserve,1690770000,c3,negative
+,Total equity attributable to equity holders of the Bank (Negative),Treasury shares,177093000,c3,negative

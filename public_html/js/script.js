@@ -9,15 +9,20 @@ $(document).on('ready', function () {
     initNCB();
 });
 var data;
-var dataFile = 'data/summary_flat.csv';
+var summaryFile = 'data/summary_flat.csv';
 var notesFile = 'data/notes.json';
+var nodesFile = 'data/nodes.csv';
 function initNCB()
 {
-    data = loadData();
+    data = loadData(summaryFile);
+    sankeyData = loadSankeyData();
+    nodesData = loadData(nodesFile)
+//    console.log(sankeyData);
+    drawSankey(sankeyData, nodesData, '#sankey');
     notes = loadNotes();
-    console.log(data);
+//    console.log(data);
     var c1 = new tableChart();
-//    var assets = _.filter(data, {Type: 'Assets'});
+    var assets = _.filter(data, {Type: 'Assets'});
 //    console.log(assets);
     c1.draw(data, '#chart');
     activateTooltip();
@@ -31,7 +36,7 @@ function activateTooltip() {
         'placement': 'right',
         'viewport': 'body'});
 }
-function loadData()
+function loadData(dataFile)
 {
     var jqxhr = $.ajax({
         url: dataFile,
@@ -100,7 +105,7 @@ function getNoteHTML(n)
 }
 function getTitleHTML(d) {
     format = d3.format("0,000");
-    
+
     var html = "<div class='tooltip-body'>"
             + "<span class='item'>" + d[0].values[0].Item + "</span><br>"
             + "<span class='year y1 " + d[0].values[0].class + "'> (" + d[0].values[0].Year + ")</span>"
@@ -299,97 +304,204 @@ var tableChart = function () {
          */
 //        var yAxis = d3.axis.orien('bottom').call(yScale);
     };
-    chart.draw2 = function (data, target, options)
-    {
 
-
-        var chartData = d3.nest()
-                .key(function (d) {
-                    return d.Type;
-                })
-                .key(function (d) {
-                    return d.Item;
-                })
-                /*.key(function (d) {
-                 return d.Year;
-                 })*/
-                .entries(data);
-        console.log(chartData);
-        _.forEach(chartData, function (d, i, a) {
-//            console.log(a[i]);
-            var total = d3.nest()
-                    .key(function (d2) {
-
-                        console.log(d2);
-                        return 'Total ' + d2.Type;
-                    })
-                    .rollup(function (leaves) {
-//                        console.log(leaves);
-                        var item = _.forEach(leaves[0].values, function (l, i2)
-                        {
-                            var t = d3.sum(leaves, function (x) {
-//                                console.log(x);
-//                                console.log(x.values[i2].Amount);
-                                return x.values[i2].Amount;
-                            });
-                            console.log(t);
-                            return t;
-                        });
-                        console.log(item);
-                        return item;
-                    })
-                    .entries(d.values);
-            console.log(total);
-        });
-        console.log(chartData);
-        var stats = d3.nest()
-                .key(function (d) {
-                    return d.Type;
-                })
-                .key(function (d) {
-                    return d.Year;
-                })
-                .rollup(function (leaves) {
-                    return {
-                        total: d3.sum(leaves, function (d) {
-//                            console.log(d);
-                            return d.Amount;
-                        }),
-                        count: leaves.length};
-                })
-                .entries(data);
-        console.log(stats);
-        var max = d3.max(stats, function (d) {
-//            console.log(d);
-            return d3.max(d.values, function (d2) {
-//                console.log(d2);
-                return d2.values.total;
-            });
-        });
-        var titles = d3.nest()
-                .key(function (d) {
-                    return d.Item;
-                })
-                .entries(data);
-        console.log(titles);
-        var max_cat_length = d3.max(titles, function (d) {
-            return d.key.length;
-        });
-        console.log(max_cat_length);
-        var w = $(target).width(), h = $(target).height(),
-                axisW = max_cat_length * 2, cw = w - axisW,
-                rowH = titles.length + chartData.length;
-        var svg = d3.select(target).append('svg');
-        var xScale = d3.scale.linear().domain([0, max]).range([0, w]);
-        var yScale = d3.scale.ordinal().rangeBands([0, w], .1, 1)
-                .domain(data.map(function (d)
-                {
-                    return d.Item;
-                }));
-        var xAxis = d3.svg.axis()
-                .scale(xScale)
-                .orient('left');
-//        var yAxis = d3.axis.orien('bottom').call(yScale);
-    };
     return chart;
 }
+
+//var sankey
+
+var sankeyFile = 'data/sankey.csv';
+function loadSankeyData(dafaFile)
+{
+    var data = loadData(sankeyFile);
+    console.log(data);
+
+    var graph = {"nodes": [], "links": []};
+
+    data.forEach(function (d) {
+        graph.nodes.push({"name": d.source});
+        graph.nodes.push({"name": d.target});
+        graph.links.push({"source": d.source,
+            "target": d.target,
+            "value": +d.value});
+    });
+
+    // return only the distinct / unique nodes
+    graph.nodes = d3.keys(d3.nest()
+            .key(function (d) {
+                return d.name;
+            })
+            .map(graph.nodes));
+
+    // loop through each link replacing the text with its index from node
+    graph.links.forEach(function (d, i) {
+        graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
+        graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
+    });
+
+    //now loop through each nodes to make nodes an array of objects
+    // rather than an array of strings
+    graph.nodes.forEach(function (d, i) {
+        graph.nodes[i] = {"name": d};
+    });
+    return graph;
+}
+
+var drawSankey = function (sankeyData, nodesData, target) {
+
+
+    var margin = {top: 10, right: 10, bottom: 2, left: 10},
+    width = $(target).width() - margin.left - margin.right,
+            height = $(target).height() - margin.top - margin.bottom;
+
+    var formatNumber = d3.format("0,000"),
+            format = function (d) {
+                return formatNumber(d) + " SR";
+            },
+            color = d3.scale.category20();
+
+    var svg = d3.select(target).append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var sankey = d3.sankey()
+            .nodeWidth(20)
+            .nodePadding(24)
+            .size([width, height]);
+
+    var path = sankey.link();
+
+
+    sankey
+            .nodes(sankeyData.nodes)
+            .links(sankeyData.links)
+            .layout(128);
+
+    var link = svg.append("g").selectAll(".link")
+            .data(sankeyData.links)
+            .enter().append("path")
+            .attr("class", function (d) {
+                c = _.select(nodesData, {name: d.target.name})[0]
+                return "link ncb-tooltip " + c.group_stroke;
+            })
+            .attr("d", path)
+            .attr('title', function (d) {
+                return d.source.name + " → " + d.target.name + "\n" + format(d.value);
+            })
+            .style("stroke-width", function (d) {
+                return Math.max(1, d.dy);
+            })
+            .sort(function (a, b) {
+                return b.dy - a.dy;
+            });
+    /*
+     link.append("title")
+     .text(function (d) {
+     return d.source.name + " → " + d.target.name + "\n" + format(d.value);
+     });
+     */
+    var node = svg.append("g").selectAll(".node")
+            .data(sankeyData.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function (d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            })
+            .call(d3.behavior.drag()
+                    .origin(function (d) {
+                        return d;
+                    })
+                    .on("dragstart", function () {
+                        this.parentNode.appendChild(this);
+                    })
+                    .on("drag", dragmove));
+
+    node.append("rect")
+            .attr("height", function (d) {
+                return d.dy;
+            })
+            .attr("width", sankey.nodeWidth())
+            .attr('class', function (d) {
+                console.log(d);
+
+                var d2 = _.select(nodesData, {name: d.name})[0];
+                console.log(d2);
+                return d2.group;
+            })
+            .classed('ncb-tooltip', true)
+            .attr('title', function (d) {
+//                console.log(d);
+                return d.name + '<br>' + format(d.value);
+            })
+//          /*  .style("fill", function (d) {
+//                return d.color = color(d.name.replace(/ .*/, ""));
+//            })
+//  /          .style("stroke", function (d) {
+//                return d3.rgb(d.color).darker(2);
+//            })*/
+            .append("title")
+            .text(function (d) {
+                return d.name + "\n" + format(d.value);
+            });
+
+
+    var tt = node.append("text")
+            .attr("x", -6)
+            .attr("y", function (d) {
+                return d.dy / 2;
+            })
+            .attr("dy", "0em")
+            .attr("text-anchor", "end")
+            .attr("transform", null)
+            .attr('class', 'ncb-tooltip')
+            .attr('title', function (d) {
+                return d.name + "\n" + format(d.value);
+            });
+    tt1 = tt.append('tspan')
+            .attr({x: -6, dy: '0em'})
+            .text(function (d) {
+                var names = d.name.split(' ');
+                left = names.splice(0, 5);
+                return left.join(' ');
+            })
+//            .attr('class', 'ncb-tooltip')
+            .attr('title', function (d) {
+                return d.name + "\n" + format(d.value);
+            });
+    tt2 = tt.append('tspan')
+            .attr({x: -6, dy: '1em'})
+            .text(function (d) {
+                var names = d.name.split(' ');
+                left = names.splice(0, 5);
+//                console.log(names);
+                return names.join(' ');
+            })
+//            .attr('class', 'ncb-tooltip')
+            .attr('title', function (d) {
+                return d.name + "\n" + format(d.value);
+            });
+    ;
+
+    tt.filter(function (d) {
+        return d.x < width / 2;
+    })
+            .attr("x", 6 + sankey.nodeWidth())
+            .attr("text-anchor", "start");
+    tt1.filter(function (d) {
+        return d.x < width / 2;
+    }).attr("x", 6 + sankey.nodeWidth());
+    tt2.filter(function (d) {
+        return d.x < width / 2;
+    }).attr("x", 6 + sankey.nodeWidth());
+
+    function dragmove(d) {
+        d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
+        sankey.relayout();
+        link.attr("d", path);
+    }
+
+
+
+};

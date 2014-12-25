@@ -31,9 +31,9 @@ body, h1{
 h1{
     text-align:center;
 }
-#chart{
+#chart, #sankey{
     width:100%;
-    height:100%;
+    height:500px;
     min-height: 600px;
 }
 
@@ -48,6 +48,7 @@ h1{
 }
 .tooltip{
     /*background-color:white;*/
+
 }
 .tooltip-arrow{
     border-top-color: white;
@@ -59,6 +60,7 @@ h1{
     background-color:rgb(249, 235, 217) !important;
     border: rgb(250, 166, 53) solid 2px;
     font-weight:bold;
+    max-width:350px !important;
 }
 .item{
 
@@ -167,4 +169,74 @@ rect.placeholder{
 
 rect.placeholder:hover{
     opacity:.2
+}
+
+
+
+/*
+
+#chart {
+  height: 500px;
+}*/
+
+.node rect {
+    cursor: move;
+    fill-opacity: .9;
+    shape-rendering: crispEdges;
+}
+
+.node text {
+    pointer-events: none;
+    text-shadow: 0 1px 0 #fff;
+}
+
+.link {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
+}
+
+.link:hover {
+    stroke-opacity: .5;
+}
+
+.c1{
+    color:rgba(0, 153,70, 1);
+    fill:rgba(0, 153,70, 1);
+}
+
+.c2{
+    color:rgba(0, 153,70, .7);
+    fill:rgba(0, 153,70, .7);
+
+}
+
+.c3{
+    color:rgba(0, 153,70, .5);
+    fill:rgba(0, 153,70, .5);
+
+}
+.c4{
+    fill:rgba(250, 166, 53, .5);
+}
+
+.c1_stroke{
+    stroke:rgba(0, 153,70, .3);
+}
+
+.c2_stroke{
+    stroke:rgba(0, 153,70, .3);
+}
+
+.c3_stroke{
+
+    stroke:rgba(0, 153,70, .3);
+
+}
+.c4_stroke{
+    stroke:rgba(250, 166, 53, .3);
+}
+
+tspan:hover{
+    font-weight: bold;
 }

@@ -1,0 +1,28 @@
+name,group,group_stroke
+Cash and balances with SAMA,c3,c3_stroke
+Due from banks and other financial institutions,c3,c3_stroke
+"Investments, net",c3,c3_stroke
+"Loans and advances, net",c3,c3_stroke
+"Investment in associates, net",c3,c3_stroke
+"Other real estate, net",c3,c3_stroke
+"Property and equipment, net",c3,c3_stroke
+"Goodwill and other intangible assets, net",c3,c3_stroke
+Other assets,c3,c3_stroke
+Assets,c1,c1_stroke
+Liabilities and Equity,c1,c1_stroke
+Equity,c2,c2_stroke
+Total equity attributable to equity holders of the Bank,c2,c2_stroke
+Total equity attributable to equity holders of the Bank (Negative),c4,c4_stroke
+Liabilities,c2,c2_stroke
+Share capital,c3,c3_stroke
+Treasury shares,c4,c4_stroke
+Statutory reserve,c3,c3_stroke
+Other reserves (cumulative changes in fair values),c3,c3_stroke
+Retained earnings,c3,c3_stroke
+Proposed dividend,c3,c3_stroke
+Foreign currency translation reserve,c4,c4_stroke
+Non-controlling interests,c3,c3_stroke
+Due to banks and other financial institutions,c3,c3_stroke
+Customers' deposits,c3,c3_stroke
+Debt securities issued,c3,c3_stroke
+Other liabilities,c3,c3_stroke
